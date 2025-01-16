@@ -4,6 +4,7 @@ import {
   Box,
   Flex,
   Image,
+  Skeleton,
   Text,
   Title,
 } from "@mantine/core";
@@ -18,11 +19,24 @@ const MyCarouselSlide = ({ id }) => {
       setMovie(data);
     });
   }, []);
+
+  if (!movie)
+    return (
+      <Box h={650} className="rounded-[35px]" bg={"gray.9"}>
+        <Skeleton height={300} radius="xl" />
+        <Skeleton height={50} width="50%" mt={20} radius="lg" ml={20} />
+        <Flex gap={"md"} align={"center"} mt={10} ml={20}>
+          <Skeleton height={35} width="20%" radius="lg" />
+          <Skeleton height={25} width="40%" radius="md" />
+        </Flex>
+        <Skeleton height={20} width="80%" mt={20} radius="md" ml={20} />
+        <Skeleton height={20} width="80%" mt={10} radius="md" ml={20} />
+        <Skeleton height={20} width="80%" mt={10} radius="md" ml={20} />
+        <Skeleton height={50} width="20%" mt={20} radius="xl" ml={20} />
+      </Box>
+    );
   return (
-    <BackgroundImage
-      src={movie ? movie.Poster : "https://placehold.co/230x340"}
-      className="relative"
-    >
+    <BackgroundImage src={movie.Poster} className="relative">
       <Box
         h={"100%"}
         c={"white"}
@@ -32,14 +46,14 @@ const MyCarouselSlide = ({ id }) => {
       >
         <div className="absolute bottom-20 left-75">
           <Title tt={"capitalize"} className="text-2xl md:text-3xl lg:text-4xl">
-            {movie ? movie.Title : ""}
+            {movie.Title}
           </Title>
           <Flex gap={"md"} align={"center"}>
             <Title
               tt={"capitalize"}
               className="text-xl md:text-2xl lg:text-3xl"
             >
-              {movie ? movie.Year : ""}
+              {movie.Year}
             </Title>
             <Badge
               bg={"yellow.8"}
@@ -47,12 +61,12 @@ const MyCarouselSlide = ({ id }) => {
               px={"md"}
               className="text-[10px] md:text-xs lg:text-sm"
             >
-              {movie ? movie.Genre : ""}
+              {movie.Genre}
             </Badge>
           </Flex>
 
           <Text w="80%" lineClamp={3} my={"md"}>
-            {movie ? movie.Plot : ""}
+            {movie.Plot}
           </Text>
           <MyButton bg={"blue.2"} c={"black"} px={"xl"}>
             Watch
@@ -60,7 +74,7 @@ const MyCarouselSlide = ({ id }) => {
         </div>
       </Box>
       <Image
-        src={movie ? movie.Poster : "https://placehold.co/230x340"}
+        src={movie.Poster}
         alt="background"
         h={650}
         fit="contain"

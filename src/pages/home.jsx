@@ -20,9 +20,9 @@ const HomePage = () => {
       <Navbar />
       <MyCarousel />
       <MyCardSection title="Batman"></MyCardSection>
-      <MyCardSection title="Avengers"></MyCardSection>
+      {/* <MyCardSection title="Avengers"></MyCardSection>
       <MyCardSection title="Disney"></MyCardSection>
-      <MyCardSection title="christmas"></MyCardSection>
+      <MyCardSection title="christmas"></MyCardSection> */}
 
     </div>
   );
