@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .list-hambuger-menu {
+    @apply bg-white w-full h-[3px] rounded-full transition-all origin-top-left;
+  }
+  .list-active1 {
+    @apply rotate-45 translate-x-0.5 translate-y-[-1px];
+  }
+  .list-active2 {
+    @apply scale-0;
+  }
+  .list-active3 {
+    @apply -rotate-45;
+  }
+  
+}
+
+.control {
+  &[data-inactive] {
+    opacity: 0;
+    cursor: default;
+  }
+}
