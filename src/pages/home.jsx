@@ -3,7 +3,6 @@ import MyCarousel from "../component/fragments/Carousel";
 import Navbar from "../component/fragments/Navbar";
 import { useEffect } from "react";
 import MyCardSection from "../component/fragments/MyCardSection";
-import { getMovies } from "../services/movie.service";
 
 const HomePage = () => {
   const { setColorScheme } = useMantineColorScheme();
@@ -20,9 +19,9 @@ const HomePage = () => {
       <Navbar />
       <MyCarousel />
       <MyCardSection title="Batman"></MyCardSection>
-      {/* <MyCardSection title="Avengers"></MyCardSection>
+      <MyCardSection title="Avengers"></MyCardSection>
       <MyCardSection title="Disney"></MyCardSection>
-      <MyCardSection title="christmas"></MyCardSection> */}
+      <MyCardSection title="christmas"></MyCardSection>
 
     </div>
   );

@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { Container } from "@mantine/core";
+import { Container, Skeleton } from "@mantine/core";
 import { useEffect, useState } from "react";
 import CardSlide from "../Elements/CardSlide";
 import classes from "./cardSection.module.css";
@@ -25,6 +25,13 @@ const MyCardSection = ({ ...props }) => {
         classNames={classes}
         slidesToScroll={{ base: 1, sm: 2, md: 2, lg: 5, xl: 5 }}
       >
+        {movies.length === 0 &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Slide key={index}>
+              <Skeleton radius="md" width="90%" className="h-[370px] sm:h-[570px] lg:h-[340px]"/>
+            </Carousel.Slide>
+          ))
+        }
         {movies !== null &&
           movies.map((movie) => {
             return (

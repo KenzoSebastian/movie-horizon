@@ -15,12 +15,17 @@ import { getSingleMovie } from "../../services/movie.service";
 const MyCarouselSlide = ({ id }) => {
   const [movie, setMovie] = useState(null);
   useEffect(() => {
-    getSingleMovie(id, (data) => {
-      setMovie(data);
-    });
+    id !== undefined &&
+      getSingleMovie(id, (data) => {
+        setMovie(data);
+      });
   }, []);
 
-  if (!movie)
+  useEffect(() => {
+    console.log(movie);
+  }, [movie]);
+
+  if (movie == null) {
     return (
       <Box h={650} className="rounded-[35px]" bg={"gray.9"}>
         <Skeleton height={300} radius="xl" />
@@ -35,8 +40,9 @@ const MyCarouselSlide = ({ id }) => {
         <Skeleton height={50} width="20%" mt={20} radius="xl" ml={20} />
       </Box>
     );
+  }
   return (
-    <BackgroundImage src={movie.Poster} className="relative">
+    <BackgroundImage src={movie.Poster} className="relative rounded-[35px] overflow-hidden">
       <Box
         h={"100%"}
         c={"white"}
@@ -73,12 +79,7 @@ const MyCarouselSlide = ({ id }) => {
           </MyButton>
         </div>
       </Box>
-      <Image
-        src={movie.Poster}
-        alt="background"
-        h={650}
-        fit="contain"
-      />
+      <Image src={movie.Poster} alt="background" h={650} fit="contain" />
     </BackgroundImage>
   );
 };
