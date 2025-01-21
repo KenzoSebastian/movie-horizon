@@ -21,10 +21,6 @@ const MyCarouselSlide = ({ id }) => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(movie);
-  }, [movie]);
-
   if (movie == null) {
     return (
       <Box h={650} className="rounded-[35px]" bg={"gray.9"}>

@@ -28,9 +28,9 @@ const Navbar = () => {
             align={"center"}
             visibleFrom="md"
           >
-            <AnchorNavbar href="#">Home</AnchorNavbar>
-            <AnchorNavbar href="#">Search</AnchorNavbar>
-            <AnchorNavbar href="#">My Playlist</AnchorNavbar>
+            <AnchorNavbar to="/">Home</AnchorNavbar>
+            <AnchorNavbar to="#">Search</AnchorNavbar>
+            <AnchorNavbar to="#">My Playlist</AnchorNavbar>
           </Group>
           <Group>
             <MyButton variant="outline" c={"#5CB338"} visibleFrom="sm">

@@ -43,28 +43,28 @@ const HamburgerMenu = () => {
 
         <Menu.Dropdown>
           <Menu.Item>
-            <AnchorNavbar color="black" href="#" size="md">
+            <AnchorNavbar to="/" size="md">
               Home
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Item>
-            <AnchorNavbar color="black" href="#" size="md">
+            <AnchorNavbar to="#" size="md">
               Search
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Item>
-            <AnchorNavbar color="black" href="#" size="md">
+            <AnchorNavbar to="#" size="md">
               My Playlist
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Divider my={"sm"} hiddenFrom="sm" />
           <Menu.Item hiddenFrom="sm">
-            <AnchorNavbar color="black" href="#" size="md">
+            <AnchorNavbar to="#" size="md">
               Sign Up
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Item hiddenFrom="sm">
-            <AnchorNavbar color="black" href="#" size="md">
+            <AnchorNavbar to="#" size="md">
               Sign In
             </AnchorNavbar>
           </Menu.Item>

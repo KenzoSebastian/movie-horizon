@@ -14,14 +14,14 @@ const HomePage = () => {
       <img
         src="./bg.png"
         alt="background"
-        className="w-full h-full object-cover fixed -z-50"
+        className="w-full h-full object-cover fixed -z-50 brightness-50"
       />
       <Navbar />
       <MyCarousel />
       <MyCardSection title="Batman"></MyCardSection>
-      <MyCardSection title="Avengers"></MyCardSection>
+      {/* <MyCardSection title="Avengers"></MyCardSection>
       <MyCardSection title="Disney"></MyCardSection>
-      <MyCardSection title="christmas"></MyCardSection>
+      <MyCardSection title="christmas"></MyCardSection> */}
 
     </div>
   );

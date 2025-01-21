@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CardSlide from "../Elements/CardSlide";
 import classes from "./cardSection.module.css";
 import { getMovies } from "../../services/movie.service";
+import { Link } from "react-router-dom";
 
 const MyCardSection = ({ ...props }) => {
   const [movies, setMovies] = useState([]);
@@ -28,15 +29,20 @@ const MyCardSection = ({ ...props }) => {
         {movies.length === 0 &&
           Array.from({ length: 5 }).map((_, index) => (
             <Carousel.Slide key={index}>
-              <Skeleton radius="md" width="90%" className="h-[370px] sm:h-[570px] lg:h-[340px]"/>
+              <Skeleton
+                radius="md"
+                width="90%"
+                className="h-[370px] sm:h-[570px] lg:h-[340px]"
+              />
             </Carousel.Slide>
-          ))
-        }
+          ))}
         {movies !== null &&
           movies.map((movie) => {
             return (
               <Carousel.Slide key={movie.imdbID}>
-                <CardSlide movie={movie} />
+                <Link to={`/movie/${movie.imdbID}`}>
+                  <CardSlide movie={movie} />
+                </Link>
               </Carousel.Slide>
             );
           })}
