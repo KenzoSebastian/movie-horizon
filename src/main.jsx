@@ -34,7 +34,7 @@ const theme = createTheme({
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MantineProvider theme={theme} defaultColorScheme="light">
+    <MantineProvider theme={theme}>
       <RouterProvider router={router} />
     </MantineProvider>
   </StrictMode>

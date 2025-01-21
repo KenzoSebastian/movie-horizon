@@ -11,6 +11,7 @@ import {
 import MyButton from "../Elements/MyButton";
 import { useEffect, useState } from "react";
 import { getSingleMovie } from "../../services/movie.service";
+import MovieTitle from "./MovieTitle";
 
 const MyCarouselSlide = ({ id }) => {
   const [movie, setMovie] = useState(null);
@@ -47,9 +48,7 @@ const MyCarouselSlide = ({ id }) => {
         className="absolute bottom-0 right-0 left-0 bg-gradient-to-t from-black to-transparent"
       >
         <div className="absolute bottom-20 left-75">
-          <Title tt={"capitalize"} className="text-2xl md:text-3xl lg:text-4xl">
-            {movie.Title}
-          </Title>
+          <MovieTitle>{movie.Title}</MovieTitle>
           <Flex gap={"md"} align={"center"}>
             <Title
               tt={"capitalize"}

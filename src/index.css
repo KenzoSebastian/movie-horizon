@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #ffff;
+}
+
 @layer components {
   .list-hambuger-menu {
     @apply bg-white w-full h-[3px] rounded-full transition-all origin-top-left;
