@@ -14,7 +14,7 @@ const Navbar = () => {
     <Box
       py={"xl"}
       px={20}
-      className="fixed w-full z-50 backdrop-blur-[5px] bg-navbar/70"
+      className="fixed w-full top-0 z-50 backdrop-blur-[5px] bg-navbar/70"
     >
       <Container size={"xl"}>
         <Flex justify={"space-between"}>

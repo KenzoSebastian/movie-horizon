@@ -39,7 +39,10 @@ const MyCarouselSlide = ({ id }) => {
     );
   }
   return (
-    <BackgroundImage src={movie.Poster} className="relative rounded-[35px] overflow-hidden">
+    <BackgroundImage
+      src={movie.Poster}
+      className="relative rounded-[35px] overflow-hidden"
+    >
       <Box
         h={"100%"}
         c={"white"}
