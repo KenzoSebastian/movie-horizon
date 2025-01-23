@@ -1,12 +1,8 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Group,
-} from "@mantine/core";
+import { Box, Container, Flex, Group } from "@mantine/core";
 import AnchorNavbar from "../Elements/AnchorNavbar";
 import MyButton from "../Elements/MyButton";
 import HamburgerMenu from "../Elements/HamburgerMenu";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -33,10 +29,10 @@ const Navbar = () => {
           </Group>
           <Group>
             <MyButton variant="outline" c={"#5CB338"} visibleFrom="sm">
-              Sign Up
+              <Link to="/signup">Sign Up</Link>
             </MyButton>
             <MyButton bg={"#5CB338"} visibleFrom="sm">
-              Sign In
+              <Link to="/signin">Sign In</Link>
             </MyButton>
             <HamburgerMenu />
           </Group>

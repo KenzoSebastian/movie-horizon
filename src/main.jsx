@@ -7,6 +7,8 @@ import HomePage from "./pages/home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/error";
 import MoviePage from "./pages/movie";
+import SignUp from "./pages/signup";
+import SignIn from "./pages/signin";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
   {
     path: "/movie/:id",
     element: <MoviePage />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
   },
 ]);
 
