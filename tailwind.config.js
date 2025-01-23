@@ -7,7 +7,7 @@ export default {
     },
     extend: {
       colors: {
-        navbar: "#522258",
+        navbar: "#2b2b31ff",
       },
     },
   },
