@@ -9,16 +9,16 @@ const HomePage = () => {
   const { setColorScheme } = useMantineColorScheme();
   useEffect(() => {
     setColorScheme("dark");
-  }, []);
+  }, [setColorScheme]);
   return (
     <div className="h-[1200px]">
       <Background />
       <Navbar />
       <MyCarousel />
-      <MyCardSection title="Batman"></MyCardSection>
-      <MyCardSection title="Avengers"></MyCardSection>
-      <MyCardSection title="Disney"></MyCardSection>
-      <MyCardSection title="christmas"></MyCardSection>
+      <MyCardSection query="Batman"></MyCardSection>
+      <MyCardSection query="Avengers"></MyCardSection>
+      <MyCardSection query="Disney"></MyCardSection>
+      <MyCardSection query="christmas"></MyCardSection>
 
     </div>
   );

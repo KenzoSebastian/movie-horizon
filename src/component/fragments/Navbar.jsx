@@ -4,7 +4,6 @@ import {
   Flex,
   Group,
 } from "@mantine/core";
-import React from "react";
 import AnchorNavbar from "../Elements/AnchorNavbar";
 import MyButton from "../Elements/MyButton";
 import HamburgerMenu from "../Elements/HamburgerMenu";

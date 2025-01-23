@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   BackgroundImage,
   Badge,
@@ -9,19 +10,11 @@ import {
   Title,
 } from "@mantine/core";
 import MyButton from "../Elements/MyButton";
-import { useEffect, useState } from "react";
-import { getSingleMovie } from "../../services/movie.service";
 import MovieTitle from "./MovieTitle";
+import useGetSingleMovie from "../../hooks/useGetSingleMovie";
 
 const MyCarouselSlide = ({ id }) => {
-  const [movie, setMovie] = useState(null);
-  useEffect(() => {
-    id !== undefined &&
-      getSingleMovie(id, (data) => {
-        setMovie(data);
-      });
-  }, []);
-
+  const movie = useGetSingleMovie(id);
   if (movie == null) {
     return (
       <Box h={650} className="rounded-[35px]" bg={"gray.9"}>

@@ -1,25 +1,8 @@
-import { Box, Drawer, Flex, Group, Menu, Button } from "@mantine/core";
-import { useRef, useState } from "react";
+import { Box, Menu} from "@mantine/core";
 import AnchorNavbar from "./AnchorNavbar";
+import useHamburgerMenu from "../../hooks/useHamburgerMenu";
 const HamburgerMenu = () => {
-  // const [opened, { open, close }] = useDisclosure(false);
-  const [opened, setOpened] = useState(false);
-  const list1 = useRef(null);
-  const list2 = useRef(null);
-  const list3 = useRef(null);
-
-  const handleOnchangeMenu = () => {
-    list1.current.classList.toggle("list-active1");
-    list2.current.classList.toggle("list-active2");
-    list3.current.classList.toggle("list-active3");
-    setOpened((openCurrent) => !openCurrent);
-  };
-  const handleOncloseMenu = () => {
-    list1.current.classList.remove("list-active1");
-    list2.current.classList.remove("list-active2");
-    list3.current.classList.remove("list-active3");
-    setOpened(false);
-  };
+  const { opened, handleOnchangeMenu, handleOncloseMenu, list1, list2, list3 } = useHamburgerMenu();
   return (
     <>
       <Menu

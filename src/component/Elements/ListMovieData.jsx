@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { Group } from "@mantine/core";
-import React from "react";
 
 const ListMovieData = ({subject, value}) => {
   return (

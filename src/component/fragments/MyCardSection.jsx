@@ -1,22 +1,17 @@
+/* eslint-disable react/prop-types */
 import { Carousel } from "@mantine/carousel";
 import { Container, Skeleton } from "@mantine/core";
-import { useEffect, useState } from "react";
 import CardSlide from "../Elements/CardSlide";
 import classes from "./cardSection.module.css";
-import { getMovies } from "../../services/movie.service";
 import { Link } from "react-router-dom";
+import useGetMovies from "../../hooks/useGetMovies";
 
 const MyCardSection = ({ ...props }) => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    getMovies(props.title, (data) => {
-      setMovies(data);
-    });
-  }, []);
+  const movies = useGetMovies(props.query);
   return (
     <Container c={"white"} size={"xl"} px={20} py={40}>
       <h1 className="text-2xl capitalize font-bold text-white md:text-3xl mb-5">
-        {props.title}
+        {props.query}
       </h1>
       <Carousel
         height={650}

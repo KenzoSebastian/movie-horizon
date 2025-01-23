@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Card, Image } from "@mantine/core";
 
 const CardSlide = ({ movie }) => {

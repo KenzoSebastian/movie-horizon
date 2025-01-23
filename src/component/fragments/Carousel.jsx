@@ -2,16 +2,10 @@ import "@mantine/carousel/styles.css";
 
 import { Carousel } from "@mantine/carousel";
 import MyCarouselSlide from "../Elements/MyCarouselSlide";
-import { useEffect, useState } from "react";
-import { getMovies } from "../../services/movie.service";
+import useGetMovies from "../../hooks/useGetMovies";
 
 const MyCarousel = () => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    getMovies("transformers", (data) => {
-      setMovies(data);
-    });
-  }, []);
+  const movies = useGetMovies("Transformers");
   return (
     <Carousel
       withIndicators
