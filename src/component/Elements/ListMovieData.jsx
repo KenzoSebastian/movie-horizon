@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import { Group } from "@mantine/core";
 
-const ListMovieData = ({subject, value}) => {
+const ListMovieData = ({ subject, value }) => {
   return (
     <Group mb={5}>
       <p>{subject} :</p>

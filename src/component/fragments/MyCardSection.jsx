@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Carousel } from "@mantine/carousel";
 import { Container, Skeleton } from "@mantine/core";
 import CardSlide from "../Elements/CardSlide";
