@@ -1,6 +1,5 @@
-import { Box, Container, Flex, Group } from "@mantine/core";
+import { Box, Button, Container, Flex, Group } from "@mantine/core";
 import AnchorNavbar from "../Elements/AnchorNavbar";
-import MyButton from "../Elements/MyButton";
 import HamburgerMenu from "../Elements/HamburgerMenu";
 import { Link } from "react-router-dom";
 
@@ -28,12 +27,12 @@ const Navbar = () => {
             <AnchorNavbar to="#">My Playlist</AnchorNavbar>
           </Group>
           <Group>
-            <MyButton variant="outline" c={"#5CB338"} visibleFrom="sm">
+            <Button size="md" radius={"md"} variant="outline" c={"#5CB338"} visibleFrom="sm">
               <Link to="/signup">Sign Up</Link>
-            </MyButton>
-            <MyButton bg={"#5CB338"} visibleFrom="sm">
+            </Button>
+            <Button size="md" radius={"md"} bg={"#5CB338"} visibleFrom="sm">
               <Link to="/signin">Sign In</Link>
-            </MyButton>
+            </Button>
             <HamburgerMenu />
           </Group>
         </Flex>

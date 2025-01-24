@@ -8,6 +8,8 @@ export default {
     extend: {
       colors: {
         navbar: "#2b2b31ff",
+        primary: "#5CB338",
+        primaryDark: "#4f9d2f",
       },
     },
   },

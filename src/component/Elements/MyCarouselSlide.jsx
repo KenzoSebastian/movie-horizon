@@ -2,13 +2,13 @@ import {
   BackgroundImage,
   Badge,
   Box,
+  Button,
   Flex,
   Image,
   Skeleton,
   Text,
   Title,
 } from "@mantine/core";
-import MyButton from "../Elements/MyButton";
 import MovieTitle from "./MovieTitle";
 import useGetSingleMovie from "../../hooks/useGetSingleMovie";
 
@@ -64,9 +64,9 @@ const MyCarouselSlide = ({ id }) => {
           <Text w="80%" lineClamp={3} my={"md"}>
             {movie.Plot}
           </Text>
-          <MyButton bg={"blue.2"} c={"black"} px={"xl"}>
+          <Button size="md" bg={"blue.2"} c={"black"} px={"xl"}>
             Watch
-          </MyButton>
+          </Button>
         </div>
       </Box>
       <Image src={movie.Poster} alt="background" h={650} fit="contain" />

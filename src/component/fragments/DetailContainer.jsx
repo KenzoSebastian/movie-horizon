@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   Group,
@@ -10,7 +11,6 @@ import {
 import ListMovieData from "../Elements/ListMovieData";
 import MovieTitle from "../Elements/MovieTitle";
 import SkeletonDetail from "../Elements/SkeletonDetail";
-import MyButton from "../Elements/MyButton";
 
 const DetailContainer = ({ movie }) => {
   if (movie == null) {
@@ -69,9 +69,9 @@ const DetailContainer = ({ movie }) => {
               />
             ))}
           </div>
-          <MyButton bg={"#5CB338"} className="w-[180px] mt-9 md:mt-0">
+          <Button size="md" bg={"#5CB338"} className="w-[180px] mt-9 md:mt-0">
             Add to playlist
-          </MyButton>
+          </Button>
         </Box>
       </Flex>
     </Container>

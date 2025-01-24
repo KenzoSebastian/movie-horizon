@@ -19,7 +19,10 @@ body {
   .list-active3 {
     @apply -rotate-45;
   }
-  
+
+  .eye-password {
+    @apply cursor-pointer hover:scale-110 transition-all duration-200;
+  }
 }
 
 .control {
