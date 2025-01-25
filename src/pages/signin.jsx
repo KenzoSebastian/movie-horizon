@@ -1,32 +1,28 @@
-import { Box, Title, TextInput, Button } from "@mantine/core";
+import { Box, Button, Title } from "@mantine/core";
+import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 import Background from "../component/Elements/Background";
-import {
-  IconAt,
-  IconLock,
-  IconEye,
-  IconEyeOff,
-  IconBrandGoogle,
-} from "@tabler/icons-react";
+import AuthForm from "../component/fragments/AuthForm";
+import { useOAuthGoogle } from "../hooks/useOAuthGoogle";
+import { supabase } from "../../database/supabaseClient";
 import { useState } from "react";
+import { BiSolidErrorCircle } from "react-icons/bi";
 
 const SignIn = () => {
-  const [visiblePassword, setVisiblePassword] = useState(false);
+  const { handleSignIn } = useOAuthGoogle();
+  const [error, setError] = useState(null);
 
-  const emailIcon = <IconAt size={18} />;
-  const passwordIcon = <IconLock size={18} />;
-  const eyeIcon = visiblePassword ? (
-    <IconEyeOff
-      size={18}
-      className="eye-password"
-      onClick={() => setVisiblePassword((prev) => !prev)}
-    />
-  ) : (
-    <IconEye
-      size={18}
-      className="eye-password"
-      onClick={() => setVisiblePassword((prev) => !prev)}
-    />
-  );
+  const handleSubmit = async (values) => {
+    console.log(values.email, values.password);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+    if (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <Box className="flex justify-center min-h-screen items-center">
       <Background />
@@ -38,53 +34,39 @@ const SignIn = () => {
         <Title mb={"xl"} className="text-primary">
           Sign In
         </Title>
-        <TextInput
-          label="Email"
-          leftSection={emailIcon}
-          description="Enter your email"
-          placeholder="example@gmail.com"
-          type="email"
-          mb={"lg"}
-        />
-        <TextInput
-          label="Password"
-          leftSection={passwordIcon}
-          rightSection={eyeIcon}
-          description="Enter your password"
-          placeholder="********"
-          type={visiblePassword ? "text" : "password"}
-        />
-        <Box my={"xl"} className="flex justify-center">
-          <Button
-            radius="sm"
-            c={"black"}
-            px={40}
-            size="md"
-            className="bg-primary hover:bg-primaryDark hover:scale-105 transition-all duration-200"
-          >
-            Sign In
-          </Button>
-        </Box>
-        <Box className="flex justify-between items-center">
-          <span className="w-5/12 h-[1px] bg-white"></span>
-          <Title order={4} className="text-center">
-            Or
+        <AuthForm titleButton="Sign In" handleSubmit={handleSubmit} />
+        {error && (
+          <p className="text-center mt-2 text-sm text-red-500">
+            <BiSolidErrorCircle size={18} className="inline-block mr-2" />
+            {error}
+          </p>
+        )}
+        <Box className="flex justify-between items-center gap-4 mt-5">
+          <span className="h-[1px] bg-white flex-1"></span>
+          <Title order={4} className="text-center text-normal">
+            or continue with
           </Title>
-          <span className="w-5/12 h-[1px] bg-white"></span>
+          <span className="h-[1px] bg-white flex-1"></span>
         </Box>
         <Box className="flex justify-center">
           <Button
             radius="sm"
             size="sm"
-            bg={"blue.2"}
             c={"black"}
-            mt={"lg"}
-            className="flex items-center"
+            my={"lg"}
+            className="bg-white flex items-center hover:bg-gray-100 hover:scale-105 transition-all duration-200"
+            onClick={handleSignIn}
           >
-            <IconBrandGoogle size={18} className="mr-2" />
+            <FcGoogle className="mr-2" size={18} />
             Sign In With Google
           </Button>
         </Box>
+        <p className="text-center mt-5">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-primary">
+            Sign Up
+          </Link>
+        </p>
       </Box>
     </Box>
   );
