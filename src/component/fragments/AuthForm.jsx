@@ -1,4 +1,4 @@
-import { Box, Button, TextInput } from "@mantine/core";
+import { Box, Button, Loader, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import useFormIcon from "../../hooks/useFormIcon";
@@ -6,6 +6,8 @@ import { emailSchema, passwordSchema } from "../../utils/validationSchemas";
 
 const AuthForm = ({ ...props }) => {
   const { visiblePassword, emailIcon, passwordIcon, eyeIcon } = useFormIcon();
+
+  const loader = <Loader color="white" size="sm" />;
 
   const form = useForm({
     mode: "uncontrolled",
@@ -53,9 +55,10 @@ const AuthForm = ({ ...props }) => {
           mt={20}
           size="md"
           type="submit"
-          className="bg-primary hover:bg-primaryDark hover:scale-105 transition-all duration-200"
+          disabled={props.disabled}
+          className="bg-primary hover:bg-primaryDark hover:scale-105 transition-all duration-200 disabled:bg-primary/50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
-          {props.titleButton}
+          {props.disabled ? loader : props.titleButton}
         </Button>
       </Box>
     </form>

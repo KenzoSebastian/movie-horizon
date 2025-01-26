@@ -1,5 +1,5 @@
 import { Box, Title } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Background from "../component/Elements/Background";
 import AuthForm from "../component/fragments/AuthForm";
 import { supabase } from "../../database/supabaseClient";
@@ -8,19 +8,20 @@ import { BiSolidErrorCircle } from "react-icons/bi";
 
 const SignUp = () => {
   const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (values) => {
-    console.log(values.email, values.password);
-    const { data, error } = await supabase.auth.signUp({
-      email: values.email,
-      password: values.password,
-    });
-    console.log(data);
-    console.log(error);
-    if (error) {
+    setDisabled(true);
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+      });
+      error ? setError(error.message) : navigate("/");
+    } catch (error) {
       setError(error.message);
-    } else {
-      window.location.href = "/signin";
     }
+    setDisabled(false);
   };
 
   return (
@@ -34,15 +35,21 @@ const SignUp = () => {
         <Title mb={"xl"} className="text-primary">
           Sign Up
         </Title>
-        <AuthForm titleButton="Sign Up" handleSubmit={handleSubmit} />
-        {error && <p className="text-center mt-2 text-sm text-red-500">
-          <BiSolidErrorCircle size={18} className="inline-block mr-2" />
-          {error}
-        </p>}
+        <AuthForm
+          titleButton="Sign Up"
+          handleSubmit={handleSubmit}
+          disabled={disabled}
+        />
+        {error && (
+          <p className="text-center mt-2 text-sm text-red-500">
+            <BiSolidErrorCircle size={18} className="inline-block mr-2" />
+            {error}
+          </p>
+        )}
         <p className="text-center mt-5">
           Have an account?{" "}
           <Link to="/signin" className="text-primary">
-            Sign Up
+            Sign In
           </Link>
         </p>
       </Box>
