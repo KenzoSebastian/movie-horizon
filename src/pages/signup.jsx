@@ -1,28 +1,12 @@
 import { Box, Title } from "@mantine/core";
-import { Link, useNavigate } from "react-router-dom";
+import { BiSolidErrorCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 import Background from "../component/Elements/Background";
 import AuthForm from "../component/fragments/AuthForm";
-import { supabase } from "../../database/supabaseClient";
-import { useState } from "react";
-import { BiSolidErrorCircle } from "react-icons/bi";
+import { useAuthSignUp } from "../hooks/useAuth";
 
 const SignUp = () => {
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(false);
-  const navigate = useNavigate();
-  const handleSubmit = async (values) => {
-    setDisabled(true);
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email: values.email,
-        password: values.password,
-      });
-      error ? setError(error.message) : navigate("/");
-    } catch (error) {
-      setError(error.message);
-    }
-    setDisabled(false);
-  };
+  const { handleSignUp, error, disabled } = useAuthSignUp();
 
   return (
     <Box className="flex justify-center min-h-screen items-center">
@@ -37,7 +21,7 @@ const SignUp = () => {
         </Title>
         <AuthForm
           titleButton="Sign Up"
-          handleSubmit={handleSubmit}
+          handleSubmit={handleSignUp}
           disabled={disabled}
         />
         {error && (

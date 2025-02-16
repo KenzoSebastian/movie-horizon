@@ -2,8 +2,10 @@ import { Box, Button, Container, Flex, Group } from "@mantine/core";
 import AnchorNavbar from "../Elements/AnchorNavbar";
 import HamburgerMenu from "../Elements/HamburgerMenu";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const session = useSelector((state) => state.session.data);
   return (
     <Box
       py={"xl"}
@@ -27,12 +29,24 @@ const Navbar = () => {
             <AnchorNavbar to="#">My Playlist</AnchorNavbar>
           </Group>
           <Group>
-            <Button size="md" radius={"md"} variant="outline" c={"#5CB338"} visibleFrom="sm">
-              <Link to="/signup">Sign Up</Link>
-            </Button>
-            <Button size="md" radius={"md"} bg={"#5CB338"} visibleFrom="sm">
-              <Link to="/signin">Sign In</Link>
-            </Button>
+            {session === null ? (
+              <>
+                <Button
+                  size="md"
+                  radius={"md"}
+                  variant="outline"
+                  c={"#5CB338"}
+                  visibleFrom="sm"
+                >
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+                <Button size="md" radius={"md"} bg={"#5CB338"} visibleFrom="sm">
+                  <Link to="/signin">Sign In</Link>
+                </Button>
+              </>
+            ) : (
+              "anda sudah login"
+            )}
             <HamburgerMenu />
           </Group>
         </Flex>

@@ -3,32 +3,9 @@ import { createRoot } from "react-dom/client";
 import "@mantine/core/styles.css";
 import "./index.css";
 import { createTheme, MantineProvider } from "@mantine/core";
-import HomePage from "./pages/home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./pages/error";
-import MoviePage from "./pages/movie";
-import SignUp from "./pages/signup";
-import SignIn from "./pages/signin";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/movie/:id",
-    element: <MoviePage />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
-]);
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import App from "./App";
 
 const theme = createTheme({
   autoContrast: true,
@@ -44,8 +21,10 @@ const theme = createTheme({
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MantineProvider theme={theme}>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <Provider store={store}>
+      <MantineProvider theme={theme}>
+        <App />
+      </MantineProvider>
+    </Provider>
   </StrictMode>
 );

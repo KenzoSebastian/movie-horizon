@@ -1,19 +1,17 @@
 import { Box, Button, Title } from "@mantine/core";
-import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
-import Background from "../component/Elements/Background";
-import AuthForm from "../component/fragments/AuthForm";
-import { useOAuthGoogle } from "../hooks/useOAuthGoogle";
-import { supabase } from "../../database/supabaseClient";
 import { useState } from "react";
 import { BiSolidErrorCircle } from "react-icons/bi";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../../database/supabaseClient";
+import Background from "../component/Elements/Background";
+import AuthForm from "../component/fragments/AuthForm";
 
 const SignIn = () => {
-  const { handleSignIn } = useOAuthGoogle();
+  // const handleSignInWithGoogle = useAuthGoogle();
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
-
   const handleSubmit = async (values) => {
     setDisabled(true);
     try {
@@ -21,7 +19,8 @@ const SignIn = () => {
         email: values.email,
         password: values.password,
       });
-      error ? setError(error.message) : navigate("/");
+      if (error) throw error;
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
@@ -64,7 +63,7 @@ const SignIn = () => {
             c={"black"}
             my={"lg"}
             className="bg-white flex items-center hover:bg-gray-100 hover:scale-105 transition-all duration-200"
-            onClick={handleSignIn}
+            onClick={() => {}}
           >
             <FcGoogle className="mr-2" size={18} />
             Sign In With Google
