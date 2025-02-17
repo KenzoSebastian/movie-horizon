@@ -6,26 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../database/supabaseClient";
 import Background from "../component/Elements/Background";
 import AuthForm from "../component/fragments/AuthForm";
+import { useAuthGoogle, useAuthSignIn } from "../hooks/useAuth";
 
 const SignIn = () => {
-  // const handleSignInWithGoogle = useAuthGoogle();
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(false);
-  const navigate = useNavigate();
-  const handleSubmit = async (values) => {
-    setDisabled(true);
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: values.email,
-        password: values.password,
-      });
-      if (error) throw error;
-      navigate("/");
-    } catch (error) {
-      setError(error.message);
-    }
-    setDisabled(false);
-  };
+  const handleSignInWithGoogle = useAuthGoogle();
+  const { handleSignIn, error, disabled } = useAuthSignIn();
 
   return (
     <Box className="flex justify-center min-h-screen items-center">
@@ -40,7 +25,7 @@ const SignIn = () => {
         </Title>
         <AuthForm
           titleButton="Sign In"
-          handleSubmit={handleSubmit}
+          handleSubmit={handleSignIn}
           disabled={disabled}
         />
         {error && (
@@ -63,7 +48,7 @@ const SignIn = () => {
             c={"black"}
             my={"lg"}
             className="bg-white flex items-center hover:bg-gray-100 hover:scale-105 transition-all duration-200"
-            onClick={() => {}}
+            onClick={handleSignInWithGoogle}
           >
             <FcGoogle className="mr-2" size={18} />
             Sign In With Google

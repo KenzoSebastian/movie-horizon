@@ -1,25 +1,59 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../database/supabaseClient";
-
-export const useAuthGoogle = () => {
-  const handleSignInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-  };
-  return handleSignInWithGoogle;
-};
 
 export const useAuthSignUp = () => {
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
   const handleSignUp = async (values) => {
     setDisabled(true);
     try {
       const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+      });
+      if (error) throw error;
+
+      const allKeys = Object.keys(localStorage);
+      if (allKeys.length >= 2) {
+        const sessionKey = allKeys.find((key) => key.includes("auth-token"));
+        localStorage.removeItem(sessionKey);
+        setOpen(true);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+    setDisabled(false);
+  };
+  return { handleSignUp, error, disabled, open, setOpen };
+};
+
+export const useAuthGoogle = () => {
+  const handleSignInWithGoogle = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      });
+      if (error) throw error;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return handleSignInWithGoogle;
+};
+
+export const useAuthSignIn = () => {
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSignIn = async (values) => {
+    setDisabled(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
@@ -30,7 +64,7 @@ export const useAuthSignUp = () => {
     }
     setDisabled(false);
   };
-  return { handleSignUp, error, disabled };
+  return { handleSignIn, error, disabled };
 };
 
 export const useAuthLogout = () => {
