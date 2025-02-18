@@ -3,7 +3,7 @@ import { Container, Skeleton } from "@mantine/core";
 import CardSlide from "../Elements/CardSlide";
 import classes from "./cardSection.module.css";
 import { Link } from "react-router-dom";
-import useGetMovies from "../../hooks/useGetMovies";
+import { useGetMovies } from "../../hooks/useGetMovies";
 
 const MyCardSection = ({ ...props }) => {
   const movies = useGetMovies(props.query);

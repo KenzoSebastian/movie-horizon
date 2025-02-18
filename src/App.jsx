@@ -6,6 +6,7 @@ import SignUp from "./pages/signup";
 import SignIn from "./pages/signin";
 import { useMantineColorScheme } from "@mantine/core";
 import { useEffect } from "react";
+import useDispatchSession from "./hooks/useDispatchSession";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const App = () => {
   const { setColorScheme } = useMantineColorScheme();
 
   useEffect(() => setColorScheme("dark"), [setColorScheme]);
+  useDispatchSession();
 
   return <RouterProvider router={router} />;
 };

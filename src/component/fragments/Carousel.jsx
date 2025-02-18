@@ -2,7 +2,7 @@ import "@mantine/carousel/styles.css";
 
 import { Carousel } from "@mantine/carousel";
 import MyCarouselSlide from "../Elements/MyCarouselSlide";
-import useGetMovies from "../../hooks/useGetMovies";
+import { useGetMovies } from "../../hooks/useGetMovies";
 
 const MyCarousel = () => {
   const movies = useGetMovies("Transformers");

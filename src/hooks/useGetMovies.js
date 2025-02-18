@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getMovies } from "../services/movie.service";
+import { getMovies, getSingleMovie } from "../services/movie.service";
 
-const useGetMovies = (query) => {
+export const useGetMovies = (query) => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     getMovies(query, (data) => {
@@ -11,4 +11,13 @@ const useGetMovies = (query) => {
   return movies;
 };
 
-export default useGetMovies;
+export const useGetSingleMovie = (id) => {
+  const [movie, setMovie] = useState(null);
+  useEffect(() => {
+    id !== undefined &&
+      getSingleMovie(id, (data) => {
+        setMovie(data);
+      });
+  }, [id]);
+  return movie;
+};

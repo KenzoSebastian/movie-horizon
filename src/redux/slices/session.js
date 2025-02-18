@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const allKeys = Object.keys(localStorage);
-const sessionKey = allKeys.find((key) => key.includes("auth-token"));
-
 const initialState = {
-  data: JSON.parse(localStorage.getItem(sessionKey)) || null,
+  data: null,
 };
 
 const sessionSlice = createSlice({
