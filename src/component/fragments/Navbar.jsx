@@ -6,7 +6,7 @@ import AnchorNavbar from "../Elements/AnchorNavbar";
 import HamburgerMenu from "../Elements/HamburgerMenu";
 import MyModal from "../Elements/MyModal";
 
-const Navbar = () => {
+const Navbar = ({ ...props }) => {
   const session = useSelector((state) => state.session.data);
   const user = useSelector((state) => state.user.data);
   const [opened, setOpened] = useState(false);
@@ -39,7 +39,7 @@ const Navbar = () => {
             )}
           </Group>
           <Group>
-            {session === null && (
+            {session === null ? (
               <>
                 <Link to="/signup" className="w-fit">
                   <Button
@@ -64,20 +64,18 @@ const Navbar = () => {
                   </Button>
                 </Link>
               </>
-            ) 
-            // : (
-            //   <div className="flex items-center w-[300px] justify-end gap-x-5">
-            //     <p className="text-xl font-semibold text-white">
-            //       {user === null ? "Guest" : user.fullname}
-            //     </p>
-            //     <img
-            //       src={user === null ? "./guest.png" : user.avatar}
-            //       alt="avatar"
-            //       className="w-12 rounded-full hover:scale-105 transition-all cursor-pointer"
-            //     />
-            //   </div>
-            // )
-            }
+            ) : (
+              <div className="flex items-center w-[300px] justify-end gap-x-5">
+                <p className="text-xl font-semibold text-white">
+                  {user === null ? "Guest" : user.fullname}
+                </p>
+                <img
+                  src={user === null ? "../guest.png" : user.avatar}
+                  alt="avatar"
+                  className="w-12 rounded-full hover:scale-105 transition-all cursor-pointer"
+                />
+              </div>
+            )}
             <HamburgerMenu />
           </Group>
         </Flex>

@@ -2,61 +2,24 @@ import {
   Box,
   Button,
   Container,
+  Dialog,
   Flex,
   Group,
   Image,
   Rating,
   Spoiler,
 } from "@mantine/core";
+import useDetailMovie from "../../hooks/useDetailMovie";
 import ListMovieData from "../Elements/ListMovieData";
 import MovieTitle from "../Elements/MovieTitle";
-import SkeletonDetail from "../Elements/SkeletonDetail";
-import { useEffect, useState } from "react";
 import MyModal from "../Elements/MyModal";
-import { useSelector } from "react-redux";
-import { supabase } from "../../../database/supabaseClient";
+import SkeletonDetail from "../Elements/SkeletonDetail";
 
 const DetailContainer = ({ movie }) => {
-  const session = useSelector((state) => state.session.data);
-  const [opened, setOpened] = useState(false);
-  const [added, setAdded] = useState(false);
-
-  useEffect(() => {
-    if (session === null || movie === null) return;
-    supabase
-      .from("watchlist")
-      .select("*")
-      .eq("user_id", session.user.id)
-      .eq("id_movie", movie.imdbID)
-      .then(({ data, error }) => {
-        if (error) throw error;
-        console.log(data);
-        if (data.length > 0) {
-          setAdded(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [movie, session]);
+  const { session, opened, setOpened, added, notif, setNotif, handleWatchlist } =
+    useDetailMovie(movie);
 
   if (movie === null) return <SkeletonDetail />;
-
-  const handleWatchlist = async () => {
-    if (session === null) {
-      setOpened(true);
-      return;
-    }
-    try {
-      const { data, error } = await supabase
-        .from("watchlist")
-        .insert({ user_id: session.user.id, id_movie: movie.imdbID });
-      if (error) throw error;
-      setAdded(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const renderDataMovie = [
     {
@@ -129,6 +92,26 @@ const DetailContainer = ({ movie }) => {
         </Box>
       </Flex>
       {session === null && <MyModal opened={opened} setOpened={setOpened} />}
+      {session !== null && (
+        <Dialog
+          opened={notif}
+          onClose={() => setNotif(false)}
+          withCloseButton
+          radius="md"
+          size="lg"
+        >
+          <Group>
+            <img
+              src="../check.png"
+              alt="check"
+              className="w-7 md:w-8 lg:w-10"
+            />
+            <p className="font-semibold text-sm md:text-base lg:text-lg">
+              Movie successfully added
+            </p>
+          </Group>
+        </Dialog>
+      )}
     </Container>
   );
 };

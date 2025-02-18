@@ -22,7 +22,7 @@ const useInsertDb = () => {
           user_id: user.id,
           email: user.email,
           fullname: user.user_metadata.full_name || "Guest",
-          avatar: "./guest.png",
+          avatar: "../guest.png",
           is_login: true,
         }).select("*");
         dispatch(setUser(response.data[0]));
