@@ -37,7 +37,7 @@ const HamburgerMenu = () => {
           </Menu.Item>
           <Menu.Item>
             <AnchorNavbar to="#" size="md">
-              My Playlist
+              Watchlist
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Divider my={"sm"} hiddenFrom="sm" />

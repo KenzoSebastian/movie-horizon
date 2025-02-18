@@ -7,6 +7,7 @@ import SignIn from "./pages/signin";
 import { useMantineColorScheme } from "@mantine/core";
 import { useEffect } from "react";
 import useDispatchSession from "./hooks/useDispatchSession";
+import WatchlistPage from "./pages/watchlist";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/watchlist",
+    element: <WatchlistPage />,
   },
 ]);
 const App = () => {

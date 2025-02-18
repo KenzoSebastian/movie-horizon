@@ -11,11 +11,53 @@ import {
 import ListMovieData from "../Elements/ListMovieData";
 import MovieTitle from "../Elements/MovieTitle";
 import SkeletonDetail from "../Elements/SkeletonDetail";
+import { useEffect, useState } from "react";
+import MyModal from "../Elements/MyModal";
+import { useSelector } from "react-redux";
+import { supabase } from "../../../database/supabaseClient";
 
 const DetailContainer = ({ movie }) => {
-  if (movie == null) {
-    return <SkeletonDetail />;
-  }
+  const session = useSelector((state) => state.session.data);
+  const [opened, setOpened] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  useEffect(() => {
+    if (session === null || movie === null) return;
+    supabase
+      .from("watchlist")
+      .select("*")
+      .eq("user_id", session.user.id)
+      .eq("id_movie", movie.imdbID)
+      .then(({ data, error }) => {
+        if (error) throw error;
+        console.log(data);
+        if (data.length > 0) {
+          setAdded(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [movie, session]);
+
+  if (movie === null) return <SkeletonDetail />;
+
+  const handleWatchlist = async () => {
+    if (session === null) {
+      setOpened(true);
+      return;
+    }
+    try {
+      const { data, error } = await supabase
+        .from("watchlist")
+        .insert({ user_id: session.user.id, id_movie: movie.imdbID });
+      if (error) throw error;
+      setAdded(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const renderDataMovie = [
     {
       subject: "Director",
@@ -69,11 +111,24 @@ const DetailContainer = ({ movie }) => {
               />
             ))}
           </div>
-          <Button size="md" bg={"#5CB338"} className="w-[180px] mt-9 md:mt-0">
-            Add to playlist
-          </Button>
+          {added ? (
+            <div className="flex items-center gap-x-4 pb-5">
+              <img src="../check.png" alt="check" className="w-8" />
+              <p>has been added to the watchlist</p>
+            </div>
+          ) : (
+            <Button
+              size="md"
+              bg={"#5CB338"}
+              className="w-[180px] mt-9 md:mt-0 hover:scale-105 transition-all"
+              onClick={handleWatchlist}
+            >
+              Add to playlist
+            </Button>
+          )}
         </Box>
       </Flex>
+      {session === null && <MyModal opened={opened} setOpened={setOpened} />}
     </Container>
   );
 };
