@@ -6,7 +6,7 @@ const useDetailMovie = (movie) => {
   const session = useSelector((state) => state.session.data);
   const [opened, setOpened] = useState(false);
   const [added, setAdded] = useState(false);
-  const [notif, setNotif] = useState(false);
+  const [notif, setNotif] = useState({ status: false, message: "" });
 
   useEffect(() => {
     if (session === null || movie === null) return;
@@ -22,14 +22,14 @@ const useDetailMovie = (movie) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message || error);
       });
   }, [movie, session]);
 
   useEffect(() => {
-    if (!notif) return;
+    if (!notif.status) return;
     setTimeout(() => {
-      setNotif(false);
+      setNotif({ status: false, message: "" });
     }, 3000);
   }, [notif]);
 
@@ -44,13 +44,38 @@ const useDetailMovie = (movie) => {
         .insert({ user_id: session.user.id, id_movie: movie.imdbID });
       if (error) throw error;
       setAdded(true);
-      setNotif(true);
+      setNotif({ status: true, message: "Movie successfully added" });
     } catch (error) {
-      console.log(error);
+      console.log(error.message || error);
     }
   };
 
-  return { session, opened, setOpened, added, notif, setNotif, handleWatchlist };
+  const handleRemoveWatchlist = async () => {
+    // setAdded(false);
+    // setNotif({ status: true, message: "Movie successfully removed" });
+    try {
+      const { data, error } = await supabase
+        .from("watchlist")
+        .delete()
+        .eq("id_movie", movie.imdbID);
+      if (error) throw error;
+      setAdded(false);
+      setNotif({ status: true, message: "Movie successfully removed" });
+    } catch (error) {
+      console.log(error.message || error);
+    }
+  };
+
+  return {
+    session,
+    opened,
+    setOpened,
+    added,
+    notif,
+    setNotif,
+    handleWatchlist,
+    handleRemoveWatchlist,
+  };
 };
 
 export default useDetailMovie;

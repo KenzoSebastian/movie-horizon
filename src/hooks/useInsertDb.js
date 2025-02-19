@@ -28,7 +28,7 @@ const useInsertDb = () => {
         dispatch(setUser(response.data[0]));
         if (response.error || error) throw error;
       } catch (error) {
-        console.log(error);
+        console.log(error.message || error);
       }
     });
   }, []);

@@ -8,6 +8,7 @@ import { useMantineColorScheme } from "@mantine/core";
 import { useEffect } from "react";
 import useDispatchSession from "./hooks/useDispatchSession";
 import WatchlistPage from "./pages/watchlist";
+import useInsertDb from "./hooks/useInsertDb";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const App = () => {
 
   useEffect(() => setColorScheme("dark"), [setColorScheme]);
   useDispatchSession();
+  useInsertDb();
 
   return <RouterProvider router={router} />;
 };

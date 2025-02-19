@@ -7,9 +7,13 @@ const useDispatchSession = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      dispatch(setSession(session));
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data: { session }, error }) => {
+        if (error) throw error;
+        dispatch(setSession(session));
+      })
+      .catch((error) => console.log(error.message || error));
   });
 
   return;

@@ -9,8 +9,8 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import MovieTitle from "./MovieTitle";
 import { useGetSingleMovie } from "../../hooks/useGetMovies";
+import MovieTitle from "./MovieTitle";
 
 const MyCarouselSlide = ({ id }) => {
   const movie = useGetSingleMovie(id);

@@ -11,7 +11,7 @@ const MoviePage = () => {
   return (
     <>
       <Background />
-      <Navbar other />
+      <Navbar />
       <DetailContainer movie={movie}/>
     </>
   );

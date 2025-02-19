@@ -14,10 +14,19 @@ import ListMovieData from "../Elements/ListMovieData";
 import MovieTitle from "../Elements/MovieTitle";
 import MyModal from "../Elements/MyModal";
 import SkeletonDetail from "../Elements/SkeletonDetail";
+import Wrapper from "./Wrapper";
 
 const DetailContainer = ({ movie }) => {
-  const { session, opened, setOpened, added, notif, setNotif, handleWatchlist } =
-    useDetailMovie(movie);
+  const {
+    session,
+    opened,
+    setOpened,
+    added,
+    notif,
+    setNotif,
+    handleWatchlist,
+    handleRemoveWatchlist
+  } = useDetailMovie(movie);
 
   if (movie === null) return <SkeletonDetail />;
 
@@ -41,7 +50,7 @@ const DetailContainer = ({ movie }) => {
   ];
 
   return (
-    <Container pt={120} size={"xl"}>
+    <Wrapper>
       <Flex gap={"lg"} className="flex-col md:flex-row">
         <Image src={movie.Poster} alt={movie.Title} />
         <Box className="flex flex-col justify-between">
@@ -78,6 +87,10 @@ const DetailContainer = ({ movie }) => {
             <div className="flex items-center gap-x-4 pb-5">
               <img src="../check.png" alt="check" className="w-8" />
               <p>has been added to the watchlist</p>
+              <Button className="bg-red-700 hover:scale-105 hover:bg-red-700 transition-all" onClick={handleRemoveWatchlist}>
+                <img src="../trash.png" alt="trash" className="w-5 mr-4" />
+                remove from playlist
+              </Button>
             </div>
           ) : (
             <Button
@@ -94,8 +107,8 @@ const DetailContainer = ({ movie }) => {
       {session === null && <MyModal opened={opened} setOpened={setOpened} />}
       {session !== null && (
         <Dialog
-          opened={notif}
-          onClose={() => setNotif(false)}
+          opened={notif.status}
+          onClose={() => setNotif({ status: false, message: "" })}
           withCloseButton
           radius="md"
           size="lg"
@@ -107,12 +120,12 @@ const DetailContainer = ({ movie }) => {
               className="w-7 md:w-8 lg:w-10"
             />
             <p className="font-semibold text-sm md:text-base lg:text-lg">
-              Movie successfully added
+              {notif.message}
             </p>
           </Group>
         </Dialog>
       )}
-    </Container>
+    </Wrapper>
   );
 };
 

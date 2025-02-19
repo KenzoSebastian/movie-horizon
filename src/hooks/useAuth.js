@@ -38,7 +38,7 @@ export const useAuthGoogle = () => {
       });
       if (error) throw error;
     } catch (error) {
-      console.log(error);
+      console.log(error.message || error);
     }
   };
 
