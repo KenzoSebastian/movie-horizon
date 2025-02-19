@@ -3,9 +3,11 @@ import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import MyCarouselSlide from "../Elements/MyCarouselSlide";
 import { useGetMovies } from "../../hooks/useGetMovies";
+import useQueryMovie from "../../hooks/useQueryMovie";
 
 const MyCarousel = () => {
-  const movies = useGetMovies("Transformers");
+    const query = useQueryMovie();
+  const movies = useGetMovies("Jurassic");
   return (
     <Carousel
       withIndicators
