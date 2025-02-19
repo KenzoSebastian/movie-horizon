@@ -65,14 +65,14 @@ const Navbar = ({ ...props }) => {
                 </Link>
               </>
             ) : (
-              <div className="flex items-center w-[300px] justify-end gap-x-5">
-                <p className="text-xl font-semibold text-white">
+              <div className="hidden sm:flex items-center w-[300px] justify-end gap-x-5">
+                <p className="hidden md:block text-xl font-semibold text-white">
                   {user === null ? "Guest" : user.fullname}
                 </p>
                 <img
                   src={user === null ? "../guest.png" : user.avatar}
                   alt="avatar"
-                  className="w-12 rounded-full hover:scale-105 transition-all cursor-pointer"
+                  className="w-8 md:w-10 rounded-full hover:scale-105 transition-all cursor-pointer"
                 />
               </div>
             )}

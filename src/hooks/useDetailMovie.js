@@ -51,8 +51,6 @@ const useDetailMovie = (movie) => {
   };
 
   const handleRemoveWatchlist = async () => {
-    // setAdded(false);
-    // setNotif({ status: true, message: "Movie successfully removed" });
     try {
       const { data, error } = await supabase
         .from("watchlist")
