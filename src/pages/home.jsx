@@ -6,12 +6,11 @@ import useQueryMovie from "../hooks/useQueryMovie";
 
 const HomePage = () => {
   const query = useQueryMovie();
-
   return (
     <div className="h-[1200px]">
       <Background />
       <Navbar />
-      <MyCarousel />
+      <MyCarousel query={query[0]}/>
       {query.map((item, index) => {
         if (index !== 0 && index <= 5) {
           return <MyCardSection query={item} key={index}></MyCardSection>;
