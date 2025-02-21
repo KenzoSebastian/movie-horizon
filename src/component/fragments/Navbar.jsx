@@ -1,15 +1,27 @@
-import { Box, Button, Container, Flex, Group } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Container,
+  Drawer,
+  DrawerCloseButton,
+  Flex,
+  Group,
+  TextInput,
+} from "@mantine/core";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AnchorNavbar from "../Elements/AnchorNavbar";
 import HamburgerMenu from "../Elements/HamburgerMenu";
 import MyModal from "../Elements/MyModal";
+import MyDrawer from "../Elements/MyDrawer";
+import { supabase } from "../../../database/supabaseClient";
 
 const Navbar = ({ ...props }) => {
   const session = useSelector((state) => state.session.data);
   const user = useSelector((state) => state.user.data);
-  const [opened, setOpened] = useState(false);
+  const [openedModal, setOpenedModal] = useState(false);
+  const [openedDrawer, setOpenedDrawer] = useState(false);
   return (
     <Box
       py={"xl"}
@@ -31,7 +43,7 @@ const Navbar = ({ ...props }) => {
             <AnchorNavbar to="/">Home</AnchorNavbar>
             <AnchorNavbar to="#">Search</AnchorNavbar>
             {session === null ? (
-              <AnchorNavbar to="#" onClick={() => setOpened(true)}>
+              <AnchorNavbar to="#" onClick={() => setOpenedModal(true)}>
                 Watchlist
               </AnchorNavbar>
             ) : (
@@ -73,6 +85,7 @@ const Navbar = ({ ...props }) => {
                   src={user === null ? "../guest.png" : user.avatar}
                   alt="avatar"
                   className="w-8 md:w-10 rounded-full hover:scale-105 transition-all cursor-pointer"
+                  onClick={() => setOpenedDrawer(true)}
                 />
               </div>
             )}
@@ -81,7 +94,16 @@ const Navbar = ({ ...props }) => {
         </Flex>
       </Container>
 
-      {session === null && <MyModal opened={opened} setOpened={setOpened} />}
+      {session === null && (
+        <MyModal opened={openedModal} setOpened={setOpenedModal} />
+      )}
+      {session !== null && user !== null && (
+        <MyDrawer
+          openedDrawer={openedDrawer}
+          setOpenedDrawer={setOpenedDrawer}
+          user={user}
+        />
+      )}
     </Box>
   );
 };

@@ -22,3 +22,12 @@ export const passwordSchema = z
   .nonempty({
     message: "Password is required",
   });
+
+export const usernameSchema = z
+  .string()
+  .min(3, {
+    message: "Username must be at least 3 characters",
+  })
+  .nonempty({
+    message: "Username is required",
+  });

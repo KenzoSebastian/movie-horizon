@@ -9,11 +9,12 @@ import { useEffect } from "react";
 import useDispatchSession from "./hooks/useDispatchSession";
 import WatchlistPage from "./pages/watchlist";
 import useInsertDb from "./hooks/useInsertDb";
+import useQueryMovie from "./hooks/useQueryMovie";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <HomePage query={useQueryMovie()} />,
     errorElement: <ErrorPage />,
   },
   {

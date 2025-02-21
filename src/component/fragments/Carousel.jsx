@@ -12,6 +12,7 @@ const MyCarousel = ({ query }) => {
       slideGap={"md"}
       height={650}
       pt={120}
+      initialSlide={2}
       slideSize={{ xs: "100%", sm: "100%", md: "80%", lg: "60%" }}
       loop
     >
@@ -24,15 +25,6 @@ const MyCarousel = ({ query }) => {
             </Carousel.Slide>
           );
         })}
-      {/* <Carousel.Slide>
-        <MyCarouselSlide />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <MyCarouselSlide />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <MyCarouselSlide />
-      </Carousel.Slide> */}
     </Carousel>
   );
 };

@@ -32,7 +32,7 @@ const AuthForm = ({ ...props }) => {
         leftSection={emailIcon}
         description="Enter your email"
         placeholder="example@gmail.com"
-        type="text"
+        type="email"
         mb={"lg"}
         key={form.key("email")}
         {...form.getInputProps("email")}

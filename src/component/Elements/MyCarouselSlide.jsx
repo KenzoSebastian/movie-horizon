@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { useGetSingleMovie } from "../../hooks/useGetMovies";
 import MovieTitle from "./MovieTitle";
+import { Link } from "react-router-dom";
 
 const MyCarouselSlide = ({ id }) => {
   const movie = useGetSingleMovie(id);
@@ -64,9 +65,17 @@ const MyCarouselSlide = ({ id }) => {
           <Text w="80%" lineClamp={3} my={"md"}>
             {movie.Plot}
           </Text>
-          <Button size="md" bg={"blue.2"} c={"black"} px={"xl"}>
-            Watch
-          </Button>
+          <Link to={`/movie/${movie.imdbID}`}>
+            <Button
+              size="md"
+              bg={"blue.2"}
+              c={"black"}
+              px={"xl"}
+              className="hover:scale-105 transition-all"
+            >
+              Watch
+            </Button>
+          </Link>
         </div>
       </Box>
       <Image src={movie.Poster} alt="background" h={650} fit="contain" />

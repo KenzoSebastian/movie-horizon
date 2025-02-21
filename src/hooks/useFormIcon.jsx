@@ -1,10 +1,11 @@
-import { IconAt, IconEye, IconEyeOff, IconLock } from "@tabler/icons-react";
+import { IconAt, IconEye, IconEyeOff, IconLock, IconUser } from "@tabler/icons-react";
 import { useState } from "react";
 
 const useFormIcon = () => {
   const [visiblePassword, setVisiblePassword] = useState(false);
 
   const emailIcon = <IconAt size={18} />;
+  const personIcon = <IconUser size={18} />;
   const passwordIcon = <IconLock size={18} />;
   const eyeIcon =
     visiblePassword ? (
@@ -21,7 +22,7 @@ const useFormIcon = () => {
       />
     );
 
-  return { visiblePassword, emailIcon, passwordIcon, eyeIcon };
+  return { visiblePassword, emailIcon, passwordIcon, eyeIcon, personIcon };
 };
 
 export default useFormIcon;
