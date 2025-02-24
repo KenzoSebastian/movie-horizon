@@ -6,7 +6,7 @@ const useNavbar = () => {
   const user = useSelector((state) => state.user.data);
   const [openedModal, setOpenedModal] = useState(false);
   const [openedDrawer, setOpenedDrawer] = useState(false);
-  const [notif, setNotif] = useState({ status: true, message: "" });
+  const [notif, setNotif] = useState({ status: false, message: "" });
 
   useEffect(() => {
     if (!notif.status) return;

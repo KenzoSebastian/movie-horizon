@@ -10,7 +10,7 @@ const HomePage = ({ query }) => {
       <Navbar />
       <MyCarousel query={query[0]} />
       {query.map((item, index) => {
-        if (index !== 0 && index <= 1) {
+        if (index !== 0 && index <= 5) {
           return <MyCardSection query={item} key={index}></MyCardSection>;
         }
       })}
