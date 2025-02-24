@@ -1,16 +1,24 @@
 import { useForm, zodResolver } from "@mantine/form";
-import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { z } from "zod";
 import { supabase } from "../../database/supabaseClient";
 import { setUser } from "../redux/slices/user";
 import { emailSchema, usernameSchema } from "../utils/validationSchemas";
 
 const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
-  const [disabled, setDisabled] = useState(false);
   const inputFileRef = useRef(null);
+  const [disabled, setDisabled] = useState(false);
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (image !== null) {
+      const url = URL.createObjectURL(image);
+      setImageUrl(url);
+    }
+  }, [image]);
 
   const form = useForm({
     mode: "uncontrolled",
@@ -31,6 +39,8 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
   const handleOnCloseDrawer = () => {
     setOpenedDrawer(false);
     form.reset();
+    setImage(null);
+    setImageUrl(null);
   };
 
   const handleOnSubmit = async (value) => {
@@ -44,16 +54,19 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
     setDisabled(true);
     setOpenedDrawer(false);
     dispatch(setUser(null));
+    const fileName = `${Date.now().toString()}_${image.name}`;
     try {
       if (image !== null) {
         const { data, error } = await supabase.storage
           .from("avatar")
-          .upload(image.name, image);
+          .upload(fileName, image, {
+            upsert: true,
+          });
         if (error) throw error;
 
         const {
           data: { publicUrl },
-        } = supabase.storage.from("avatar").getPublicUrl(image.name);
+        } = supabase.storage.from("avatar").getPublicUrl(fileName);
         const { data: updateData, error: updateError } = await supabase
           .from("users")
           .update({
@@ -94,7 +107,12 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
     inputFileRef.current.click();
   };
 
-  const handleFileChange = (e) => setImage(e.target.files[0]);
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+    // if (image !== null) {
+    //   const url = URL.createObjectURL(image);
+    // }
+  };
 
   return {
     form,
@@ -104,6 +122,7 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
     handleOnSubmit,
     handleInputFile,
     handleFileChange,
+    imageUrl,
   };
 };
 

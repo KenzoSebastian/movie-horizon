@@ -12,6 +12,7 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
     handleOnSubmit,
     handleInputFile,
     handleFileChange,
+    imageUrl,
   } = useUpdateUser(setOpenedDrawer, user, setNotif);
   const loader = <Loader color="white" size="sm" />;
 
@@ -30,7 +31,13 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
       <Drawer.Body>
         <div className="relative w-fit mx-auto">
           <img
-            src={user === null ? "../guest.png" : user.avatar}
+            src={
+              user === null
+                ? "../guest.png"
+                : imageUrl !== null
+                ? imageUrl
+                : user.avatar
+            }
             alt="avatar"
             className="w-44 rounded-full"
           />
@@ -43,6 +50,7 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
         </div>
         <form onSubmit={form.onSubmit(handleOnSubmit)}>
           <TextInput
+            accept="image/*"
             type="file"
             ref={inputFileRef}
             key={form.key("avatar")}
