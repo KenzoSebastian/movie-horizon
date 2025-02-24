@@ -2,7 +2,7 @@ import { Box, Button, Drawer, Loader, TextInput } from "@mantine/core";
 import useFormIcon from "../../hooks/useFormIcon";
 import useUpdateUser from "../../hooks/useUpdateUser";
 
-const MyDrawer = ({ openedDrawer, setOpenedDrawer, user }) => {
+const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
   const { emailIcon, personIcon } = useFormIcon();
   const {
     form,
@@ -12,7 +12,7 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user }) => {
     handleOnSubmit,
     handleInputFile,
     handleFileChange,
-  } = useUpdateUser(user, setOpenedDrawer);
+  } = useUpdateUser(setOpenedDrawer, user, setNotif);
   const loader = <Loader color="white" size="sm" />;
 
   return (

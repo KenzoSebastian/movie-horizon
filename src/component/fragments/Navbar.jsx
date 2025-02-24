@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Dialog,
   Drawer,
   DrawerCloseButton,
   Flex,
@@ -16,12 +17,19 @@ import HamburgerMenu from "../Elements/HamburgerMenu";
 import MyModal from "../Elements/MyModal";
 import MyDrawer from "../Elements/MyDrawer";
 import { supabase } from "../../../database/supabaseClient";
+import useNavbar from "../../hooks/useNavbar";
 
 const Navbar = ({ ...props }) => {
-  const session = useSelector((state) => state.session.data);
-  const user = useSelector((state) => state.user.data);
-  const [openedModal, setOpenedModal] = useState(false);
-  const [openedDrawer, setOpenedDrawer] = useState(false);
+  const {
+    session,
+    user,
+    openedModal,
+    setOpenedModal,
+    openedDrawer,
+    setOpenedDrawer,
+    notif,
+    setNotif,
+  } = useNavbar();
   return (
     <Box
       py={"xl"}
@@ -102,7 +110,32 @@ const Navbar = ({ ...props }) => {
           openedDrawer={openedDrawer}
           setOpenedDrawer={setOpenedDrawer}
           user={user}
+          setNotif={setNotif}
         />
+      )}
+      {session !== null && (
+        <Dialog
+          opened={notif.status}
+          onClose={() => setNotif({ status: false, message: "" })}
+          withCloseButton
+          radius="md"
+          size="lg"
+        >
+          <Group>
+            <img
+              src={
+                notif.message === "Failed to update profile"
+                  ? "../cancel.png"
+                  : "../check.png"
+              }
+              alt="check"
+              className="w-7 md:w-8 lg:w-10"
+            />
+            <p className="font-semibold text-sm md:text-base lg:text-lg">
+              {notif.message}
+            </p>
+          </Group>
+        </Dialog>
       )}
     </Box>
   );
