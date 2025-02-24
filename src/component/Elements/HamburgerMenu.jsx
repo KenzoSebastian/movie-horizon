@@ -36,12 +36,12 @@ const HamburgerMenu = () => {
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Item>
-            <AnchorNavbar to="#" size="md">
+            <AnchorNavbar to="/search" size="md">
               Search
             </AnchorNavbar>
           </Menu.Item>
           <Menu.Item>
-            <AnchorNavbar to="#" size="md">
+            <AnchorNavbar to="/watchlist" size="md">
               Watchlist
             </AnchorNavbar>
           </Menu.Item>

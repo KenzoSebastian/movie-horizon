@@ -49,7 +49,7 @@ const Navbar = ({ ...props }) => {
             visibleFrom="md"
           >
             <AnchorNavbar to="/">Home</AnchorNavbar>
-            <AnchorNavbar to="#">Search</AnchorNavbar>
+            <AnchorNavbar to="/search">Search</AnchorNavbar>
             {session === null ? (
               <AnchorNavbar to="#" onClick={() => setOpenedModal(true)}>
                 Watchlist

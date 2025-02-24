@@ -10,6 +10,7 @@ import useDispatchSession from "./hooks/useDispatchSession";
 import WatchlistPage from "./pages/watchlist";
 import useInsertDb from "./hooks/useInsertDb";
 import useQueryMovie from "./hooks/useQueryMovie";
+import SearchPage from "./pages/search";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/search",
+    element: <SearchPage />,
   },
   {
     path: "/watchlist",
