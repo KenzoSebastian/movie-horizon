@@ -3,21 +3,15 @@ import {
   Button,
   Container,
   Dialog,
-  Drawer,
-  DrawerCloseButton,
   Flex,
-  Group,
-  TextInput,
+  Group
 } from "@mantine/core";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import useNavbar from "../../hooks/useNavbar";
 import AnchorNavbar from "../Elements/AnchorNavbar";
 import HamburgerMenu from "../Elements/HamburgerMenu";
-import MyModal from "../Elements/MyModal";
 import MyDrawer from "../Elements/MyDrawer";
-import { supabase } from "../../../database/supabaseClient";
-import useNavbar from "../../hooks/useNavbar";
+import MyModal from "../Elements/MyModal";
 
 const Navbar = ({ ...props }) => {
   const {

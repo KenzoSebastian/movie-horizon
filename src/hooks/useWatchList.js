@@ -7,7 +7,7 @@ const useWatchList = () => {
   const user = useSelector((state) => state.user.data);
   useEffect(() => {
     if (user === null) return;
-
+    setMovies(null);
     supabase
       .from("watchlist")
       .select("*")

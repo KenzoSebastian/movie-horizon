@@ -1,9 +1,7 @@
 import { Box, Button, Title } from "@mantine/core";
-import { useState } from "react";
 import { BiSolidErrorCircle } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
-import { supabase } from "../../database/supabaseClient";
+import { Link } from "react-router-dom";
 import Background from "../component/Elements/Background";
 import AuthForm from "../component/fragments/AuthForm";
 import { useAuthGoogle, useAuthSignIn } from "../hooks/useAuth";

@@ -1,6 +1,7 @@
-import { Card, Image, Skeleton } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useGetSingleMovie } from "../../hooks/useGetMovies";
+import CardSlide from "../Elements/CardSlide";
 
 const WatchlistContainer = ({ movie }) => {
   const data = useGetSingleMovie(movie.id_movie);
@@ -14,17 +15,7 @@ const WatchlistContainer = ({ movie }) => {
     );
   return (
     <Link to={`/movie/${data.imdbID}`}>
-      <Card
-        shadow="sm"
-        m={15}
-        radius="md"
-        withBorder
-        className="hover:scale-105 transition-all duration-300 cursor-pointer"
-      >
-        <Card.Section>
-          <Image src={data.Poster} alt={data.Title} />
-        </Card.Section>
-      </Card>
+      <CardSlide movie={data} />
     </Link>
   );
 };

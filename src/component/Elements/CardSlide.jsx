@@ -8,14 +8,10 @@ const CardSlide = ({ movie }) => {
       radius="md"
       withBorder
       w="90%"
-      className="hover:scale-105 transition-all duration-300 cursor-pointer absolute"
+      className="hover:scale-105 transition-all duration-300 cursor-pointer"
     >
       <Card.Section>
-        <Image
-          src={movie.Poster}
-          alt={movie.Title}
-          className="h-[370px] sm:h-[570px] lg:h-[340px]"
-        />
+        <Image src={movie.Poster} alt={movie.Title} className="image-height" />
       </Card.Section>
     </Card>
   );

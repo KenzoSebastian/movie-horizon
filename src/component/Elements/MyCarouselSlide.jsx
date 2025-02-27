@@ -5,31 +5,18 @@ import {
   Button,
   Flex,
   Image,
-  Skeleton,
   Text,
-  Title,
+  Title
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { useGetSingleMovie } from "../../hooks/useGetMovies";
 import MovieTitle from "./MovieTitle";
-import { Link } from "react-router-dom";
+import SkeletonCarousel from "./SkeletonCarousel";
 
 const MyCarouselSlide = ({ id }) => {
   const movie = useGetSingleMovie(id);
   if (movie == null) {
-    return (
-      <Box h={650} className="rounded-[35px]" bg={"gray.9"}>
-        <Skeleton height={300} radius="xl" />
-        <Skeleton height={50} width="50%" mt={20} radius="lg" ml={20} />
-        <Flex gap={"md"} align={"center"} mt={10} ml={20}>
-          <Skeleton height={35} width="20%" radius="lg" />
-          <Skeleton height={25} width="40%" radius="md" />
-        </Flex>
-        <Skeleton height={20} width="80%" mt={20} radius="md" ml={20} />
-        <Skeleton height={20} width="80%" mt={10} radius="md" ml={20} />
-        <Skeleton height={20} width="80%" mt={10} radius="md" ml={20} />
-        <Skeleton height={50} width="20%" mt={20} radius="xl" ml={20} />
-      </Box>
-    );
+    return <SkeletonCarousel />;
   }
   return (
     <BackgroundImage

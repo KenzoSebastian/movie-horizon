@@ -7,7 +7,7 @@ export const useGetMovies = (query) => {
     getMovies(query, (data) => {
       setMovies(data);
     });
-  }, [query]);
+  }, []);
   return movies;
 };
 

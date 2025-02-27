@@ -23,6 +23,10 @@ body {
   .eye-password {
     @apply cursor-pointer hover:scale-110 transition-all duration-200;
   }
+
+  .image-height {
+    @apply h-[370px] sm:h-[570px] lg:h-[340px];
+  }
 }
 
 .control {
