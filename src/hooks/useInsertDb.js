@@ -14,21 +14,29 @@ const useInsertDb = () => {
           .select("*")
           .eq("user_id", user.id);
         if (data.length > 0) {
-          dispatch(setUser(data[0]));
+          const { data: updateData, error: updateError } = await supabase
+            .from("users")
+            .update({ is_login: true })
+            .eq("user_id", user.id)
+            .select("*");
+          dispatch(setUser(updateData[0]));
           return;
         }
         console.log("buat data baru");
-        const response = await supabase.from("users").insert({
-          user_id: user.id,
-          email: user.email,
-          fullname: user.user_metadata.full_name || "Guest",
-          avatar: "../guest.png",
-          is_login: true,
-        }).select("*");
+        const response = await supabase
+          .from("users")
+          .insert({
+            user_id: user.id,
+            email: user.email,
+            fullname: user.user_metadata.full_name || "Guest",
+            avatar: "../guest.png",
+            is_login: true,
+          })
+          .select("*");
         dispatch(setUser(response.data[0]));
         if (response.error || error) throw error;
       } catch (error) {
-        console.log(error.message || error); 
+        console.log(error.message || error);
       }
     });
   }, []);

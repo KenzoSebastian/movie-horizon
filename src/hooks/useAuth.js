@@ -68,13 +68,20 @@ export const useAuthSignIn = () => {
   return { handleSignIn, error, disabled };
 };
 
-export const useAuthLogout = (setOpenedDrawer) => {
-  const {setLogOut} = useContext(LogOut);
+export const useAuthLogout = (setOpenedDrawer, user) => {
+  const { setLogOut } = useContext(LogOut);
   const handleLogout = async () => {
     setOpenedDrawer(false);
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+      const {error: updateError } = await supabase
+        .from("users")
+        .update({
+          is_login: false,
+        })
+        .eq("user_id", user.user_id);
+      if (updateError) throw updateError;
       setLogOut({
         status: true,
         message: "Successfully Logged Out",

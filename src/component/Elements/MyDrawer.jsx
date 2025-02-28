@@ -14,15 +14,13 @@ const MyDrawer = ({
     form,
     disabled,
     inputFileRef,
-    inputEmailRef,
-    inputUsernameRef,
     handleOnCloseDrawer,
     handleOnSubmit,
     handleInputFile,
     handleFileChange,
     imageUrl,
   } = useUpdateUser(setOpenedDrawer, user, setNotif);
-  const handleLogOut = useAuthLogout(setOpenedDrawer);
+  const handleLogOut = useAuthLogout(setOpenedDrawer, user);
 
   const loader = <Loader color="white" size="sm" />;
 
@@ -74,7 +72,6 @@ const MyDrawer = ({
             description="Enter your email"
             placeholder="example@gmail.com"
             type="text"
-            ref={inputEmailRef}
             mb={"lg"}
             key={form.key("email")}
             {...form.getInputProps("email")}
@@ -86,7 +83,6 @@ const MyDrawer = ({
             description="Enter your username"
             placeholder="John Doe"
             type="text"
-            ref={inputUsernameRef}
             mb={"lg"}
             key={form.key("username")}
             {...form.getInputProps("username")}

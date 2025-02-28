@@ -8,8 +8,6 @@ import { emailSchema, usernameSchema } from "../utils/validationSchemas";
 
 const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
   const inputFileRef = useRef(null);
-  const inputEmailRef = useRef(null);
-  const inputUsernameRef = useRef(null);
   const [disabled, setDisabled] = useState(false);
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -130,8 +128,6 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
     form,
     disabled,
     inputFileRef,
-    inputEmailRef,
-    inputUsernameRef,
     handleOnCloseDrawer,
     handleOnSubmit,
     handleInputFile,
