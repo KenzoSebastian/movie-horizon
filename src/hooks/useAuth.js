@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../database/supabaseClient";
+import { LogOut } from "../context/LogOut";
 
 export const useAuthSignUp = () => {
   const [error, setError] = useState(null);
@@ -67,9 +68,26 @@ export const useAuthSignIn = () => {
   return { handleSignIn, error, disabled };
 };
 
-export const useAuthLogout = () => {
+export const useAuthLogout = (setOpenedDrawer) => {
+  const {setLogOut} = useContext(LogOut);
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    setOpenedDrawer(false);
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      setLogOut({
+        status: true,
+        message: "Successfully Logged Out",
+        imgSrc: "../check.png",
+      });
+    } catch (error) {
+      setLogOut({
+        status: true,
+        message: "Failed to Log Out",
+        imgSrc: "../cancel.png",
+      });
+      console.log(error.message || error);
+    }
   };
   return handleLogout;
 };

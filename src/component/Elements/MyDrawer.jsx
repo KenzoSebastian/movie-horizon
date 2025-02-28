@@ -1,19 +1,29 @@
 import { Box, Button, Drawer, Loader, TextInput } from "@mantine/core";
 import useFormIcon from "../../hooks/useFormIcon";
 import useUpdateUser from "../../hooks/useUpdateUser";
+import { useAuthLogout } from "../../hooks/useAuth";
 
-const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
+const MyDrawer = ({
+  openedDrawer,
+  setOpenedDrawer,
+  user,
+  setNotif,
+}) => {
   const { emailIcon, personIcon } = useFormIcon();
   const {
     form,
     disabled,
     inputFileRef,
+    inputEmailRef,
+    inputUsernameRef,
     handleOnCloseDrawer,
     handleOnSubmit,
     handleInputFile,
     handleFileChange,
     imageUrl,
   } = useUpdateUser(setOpenedDrawer, user, setNotif);
+  const handleLogOut = useAuthLogout(setOpenedDrawer);
+
   const loader = <Loader color="white" size="sm" />;
 
   return (
@@ -64,6 +74,7 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
             description="Enter your email"
             placeholder="example@gmail.com"
             type="text"
+            ref={inputEmailRef}
             mb={"lg"}
             key={form.key("email")}
             {...form.getInputProps("email")}
@@ -75,11 +86,12 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
             description="Enter your username"
             placeholder="John Doe"
             type="text"
+            ref={inputUsernameRef}
             mb={"lg"}
             key={form.key("username")}
             {...form.getInputProps("username")}
           />
-          <Box mt={"xl"} className="flex justify-center">
+          <Box mt={"xl"} className="flex flex-col justify-center w-fit mx-auto">
             <Button
               radius="sm"
               c={"black"}
@@ -90,6 +102,19 @@ const MyDrawer = ({ openedDrawer, setOpenedDrawer, user, setNotif }) => {
               className="bg-primary hover:bg-primaryDark hover:scale-105 transition-all duration-200 disabled:bg-primary/50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {disabled ? loader : "Update"}
+            </Button>
+
+            <Button
+              radius="sm"
+              c={"white"}
+              mt={20}
+              size="md"
+              type="button"
+              disabled={disabled}
+              className="bg-red-700 hover:bg-red-800 hover:scale-105 transition-all duration-200"
+              onClick={handleLogOut}
+            >
+              Log Out
             </Button>
           </Box>
         </form>

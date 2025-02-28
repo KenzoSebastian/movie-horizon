@@ -8,6 +8,8 @@ import { emailSchema, usernameSchema } from "../utils/validationSchemas";
 
 const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
   const inputFileRef = useRef(null);
+  const inputEmailRef = useRef(null);
+  const inputUsernameRef = useRef(null);
   const [disabled, setDisabled] = useState(false);
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -19,7 +21,7 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
       setImageUrl(url);
     }
   }, [image]);
-
+  
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -54,9 +56,9 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
     setDisabled(true);
     setOpenedDrawer(false);
     dispatch(setUser(null));
-    const fileName = `${Date.now().toString()}_${image.name}`;
     try {
       if (image !== null) {
+        const fileName = `${Date.now().toString()}_${image.name}`;
         const { data, error } = await supabase.storage
           .from("avatar")
           .upload(fileName, image, {
@@ -79,7 +81,11 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
 
         if (updateError) throw updateError;
         dispatch(setUser(updateData[0]));
-        setNotif({ status: true, message: "Profile successfully updated" });
+        setNotif({
+          status: true,
+          message: "Profile Successfully updated",
+          imgSrc: "../check.png",
+        });
       } else {
         const { data, error } = await supabase
           .from("users")
@@ -91,11 +97,20 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
           .select("*");
 
         if (error) throw error;
+
         dispatch(setUser(data[0]));
-        setNotif({ status: true, message: "Profile successfully updated" });
+        setNotif({
+          status: true,
+          message: "Profile Successfully updated",
+          imgSrc: "../check.png",
+        });
       }
     } catch (error) {
-      setNotif({ status: true, message: "Failed to update profile" });
+      setNotif({
+        status: true,
+        message: "Failed to Update Profile",
+        imgSrc: "../cancel.png",
+      });
       dispatch(setUser(user));
       console.log(error.message || error);
     }
@@ -109,15 +124,14 @@ const useUpdateUser = (setOpenedDrawer, user, setNotif) => {
 
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
-    // if (image !== null) {
-    //   const url = URL.createObjectURL(image);
-    // }
   };
 
   return {
     form,
     disabled,
     inputFileRef,
+    inputEmailRef,
+    inputUsernameRef,
     handleOnCloseDrawer,
     handleOnSubmit,
     handleInputFile,
