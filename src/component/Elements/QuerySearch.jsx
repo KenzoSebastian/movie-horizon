@@ -25,8 +25,8 @@ const QuerySearch = ({ query, initialQuery }) => {
 
   if (movies === undefined) {
     return (
-      <Text px={20} className="text-white font-medium text-base md:text-lg">
-        No Result
+      <Text className="text-white font-medium text-base md:text-lg">
+        No Result of "{debounceQuery}"
       </Text>
     );
   }
@@ -35,7 +35,7 @@ const QuerySearch = ({ query, initialQuery }) => {
     return (
       <>
         {Array.from({ length: 8 }).map((_, i) => (
-          <Skeleton radius="md" width="100%" className="image-height" key={i} />
+          <Skeleton radius="md" width="100%" m={15} className="image-height" key={i} />
         ))}
       </>
     );

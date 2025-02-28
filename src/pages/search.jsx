@@ -4,13 +4,12 @@ import SearchContainer from "../component/fragments/SearchContainer";
 import useQueryMovie from "../hooks/useQueryMovie";
 
 const SearchPage = () => {
-  const initialQuery = useQueryMovie()[0];
-
+  const query = useQueryMovie();
   return (
     <>
       <Background />
       <Navbar />
-      <SearchContainer initialQuery={initialQuery} />
+      <SearchContainer initialQuery={query} />
     </>
   );
 };
